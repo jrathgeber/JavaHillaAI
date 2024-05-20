@@ -5,6 +5,8 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
+const AiView = lazy(async () => import('Frontend/views/ai/AiView.js'));
+
 const routing = [
   {
     element: <MainLayout />,
@@ -12,6 +14,7 @@ const routing = [
     children: [
       { path: '/', element: <HelloWorldView />, handle: { title: 'Hello World' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
+      { path: '/ai', element: <AiView />, handle: { title: 'Ai' } },
     ],
   },
 ] as RouteObject[];
