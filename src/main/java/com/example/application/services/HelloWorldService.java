@@ -13,7 +13,7 @@ public class HelloWorldService {
         if (name.isEmpty()) {
             return "Hello stranger";
         } else {
-            return "Ciao" + name;
+            return "Ciao " + name;
         }
     }
 }
