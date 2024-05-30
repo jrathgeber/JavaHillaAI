@@ -1,0 +1,32 @@
+
+January 26th, 2024 | 8 min. read
+
+Andrew McClymontIn 2023, the global collateralized loan obligation (CLO) market faced financial instability and high interest rates, with the European Central Bank and the Federal Reserve signaling no rate cuts until mid-2024. Persistent high inflation and a strong labor market, especially in healthcare and housing, supported these cautious policies, foreshadowing continued economic challenges in 2024.
+
+New Issuance in 2023
+
+Last year, the European primary CLO market matched its 2022 performance, generating €26 billion from 69 deals, but fell €12 billion short of 2021's figures, according to Trepp data. The year ended with AAA spreads at approximately 170 basis points, down from 190 earlier. The market also anticipates a new middle market deal in Europe.
+
+CLO issuance in the U.S. reached $116 billion from 266 deals, a decline from both 2022 and 2021, aligning with 2019 levels, as per Trepp data. The spreads narrowed to around 175 basis points by year-end.
+
+The past year saw a notable shift in market dynamics, due to a scarcity of loan supplies driven by a reduction in mergers and acquisitions and leveraged buyouts. Managers had to look to the secondary market to ramp up deals. This led to a tightening of loan spreads, which adversely affected the arbitrage opportunities for CLO equity.
+
+At the same time, as spreads widened up the stack, tranches started to offer equity-like returns. Managers addressed this shortfall by increasingly relying on capital from risk-retention vehicles or captive equity vehicles. Approximately 80% of US CLOs issued up to August 2023 utilized these structures, primarily for funding the equity tranche, reported Risk.Net. However, this strategy was contentious, as it raised questions about the appropriateness of using such vehicles to compensate for reduced interest from equity investors. Recently, Carlyle has raised $600 million for its first captive equity fund.
+
+Amend and Extend Prominence
+
+Another prominent trend of the 2023 market was the rise of the amend and extend (A&E) agreements, driven by the lack of underwriting needed as no new loan was created. The increase in A&Es led to the subsequent trend of the snooze drag, which involved CLO managers remaining silent during the vote on A&E deals. In other words, ‘snoozing’, allows them to get ‘dragged’ into the new loan with a longer term.
+
+"Snoozing" allowed these managers to remain invested in certain attractive loans and preserve assets under management. Typically, if a CLO manager is unable to agree to a loan extension, the borrowers are obligated to repay the CLO manager at face value, which can benefit the manager, but be costly to the issuer.
+
+For deals outside of reinvestment periods (RP), this could mean further impacts to tests such as weighed average life (WAL) or increased prepayment speeds. If the extension would benefit the deal, a snooze drag may have been used. As more deals exit their RP, issuers are incentivized to extend loans earlier rather than later to reduce the likelihood of a deal not being able to agree to the extension forcing the loan repayment.
+
+Despite this, Trepp’s data shows that 28% of the market is breaching average life tests, with many having not deleveraged, indicating a degree of flexibility in the market. This is seen in the prevalent use of refinancings and A&E agreements without needing WAL extensions.
+
+Outlook for 2024
+
+Looking ahead to 2024, 36% of the market has already exited its reinvestment periods, with an additional 10% expected to do so by the end of 2024, as shown by Trepp data. This could lead to tighter spreads and a potential increase in issuance. Predictions for 2024 European issuance are varied, with Deutsche Bank and Bank of America (BofA) estimating €27 billion, Morgan Stanley €25 billion, and Barclays the lowest at €20 billion, as reported by 9fin. This is influenced by arbitrage issues and higher default risk, with Fitch's outlook for the EU leveraged loan sector being negative, forecasting defaults to rise to 4%.
+
+In the U.S., issuance estimates range from $100 billion to $115 billion, with a 75% broadly syndicated loan (BSL) to 25% middle market split, and top predictions from Deutsche, JPM, and Morgan Stanley, reported 9fin. Citi and BofA predict $110 billion, while Barclays and BNP Paribas anticipate a steady $100 billion.
+
+Additionally, 13% of the total live universe is set to exit its non-call period in 2024, leading to an expected rise in repricing, especially in the U.S. in response to costly deals from 2022. The focus is also on net issuance, with CLOs leaving reinvestment phases and increasing liquidations. Another key aspect for 2024 is the potential for downgrades and exceeding CCC limits in deals. It is estimated that 28% of BSL CLOs are already breaching their typical 7.5% limit and there's an expected market-wide increase in CCC downgrades due to B3 loan concentration in the CLO market.
