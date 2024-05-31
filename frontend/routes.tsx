@@ -4,8 +4,8 @@ import { lazy } from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
-
 const AiView = lazy(async () => import('Frontend/views/ai/AiView.js'));
+const CloView = lazy(async () => import('Frontend/views/clo/CloView.js'));
 
 const routing = [
   {
@@ -15,6 +15,7 @@ const routing = [
       { path: '/', element: <HelloWorldView />, handle: { title: 'Hello World' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
       { path: '/ai', element: <AiView />, handle: { title: 'Ai' } },
+      { path: '/clo', element: <CloView />, handle: { title: 'Clo' } },
     ],
   },
 ] as RouteObject[];

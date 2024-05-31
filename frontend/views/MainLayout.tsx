@@ -29,6 +29,9 @@ export default function MainLayout() {
             <NavLink className={navLinkClasses} to="/ai">
               Ai
             </NavLink>
+            <NavLink className={navLinkClasses} to="/clo">
+              Clo
+            </NavLink>
           </nav>
         </header>
       </div>
