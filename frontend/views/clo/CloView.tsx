@@ -1,8 +1,8 @@
 import { Button } from '@hilla/react-components/Button.js';
 import { Notification } from '@hilla/react-components/Notification.js';
 import { TextField } from '@hilla/react-components/TextField.js';
+import { TextArea } from '@hilla/react-components/TextArea.js';
 import { CloService } from 'Frontend/generated/endpoints.js';
-//import { useState } from 'react';
 import {useEffect, useState} from 'react';
 import {Grid} from "@hilla/react-components/Grid";
 import {GridColumn} from "@hilla/react-components/GridColumn";
@@ -15,16 +15,24 @@ export default function CloView() {
   const [clos, setClos] = useState<CloRecord[]>([]);
   const [selected, setSelected] = useState<CloRecord | null | undefined>();
 
+  useEffect(() => {
+    CloService.findAllClos().then(setClos);
+  }, []);
 
   return (
     <>
       <section className="flex p-m gap-m items-end">
-        <TextField
-          label="Your Question"
-          onValueChanged={(e) => {
-            setName(e.detail.value);
-          }}
+
+        <TextArea label="Ask a long question"
+
+            style={{ width: '100%' }}
+
+            onValueChanged={(e) => {
+                setName(e.detail.value);
+            }}
+
         />
+
         <Button
           onClick={async () => {
             const serverResponse = await CloService.askQuestion(name);
