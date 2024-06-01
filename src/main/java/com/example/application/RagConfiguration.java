@@ -46,8 +46,12 @@ public class RagConfiguration {
             log.info("Vector Store File Exists,");
             simpleVectorStore.load(vectorStoreFile);
         } else {
-            log.info("Vector Store File Does Not Exist, loading documents");
 
+            TextSplitter textSplitter = new TokenTextSplitter();
+
+            /*
+
+            log.info("Vector Store File Does Not Exist, loading documents");
             TextReader textReader = new TextReader(faq);
             textReader.getCustomMetadata().put("filename", "clo_stats.txt");
             List<Document> documents = textReader.get();
@@ -56,7 +60,10 @@ public class RagConfiguration {
             simpleVectorStore.add(splitDocuments);
             simpleVectorStore.save(vectorStoreFile);
 
-            log.info("Loading Spring Boot Reference PDF into Vector Store");
+
+
+             */
+            log.info("Loading CLO IMA PDFs into Vector Store");
             var config = PdfDocumentReaderConfig.builder()
                     .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
                             .withNumberOfTopPagesToSkipBeforeDelete(0)
@@ -65,8 +72,12 @@ public class RagConfiguration {
                     .build();
 
             var pdfReader = new PagePdfDocumentReader(pdfResource, config);
-            //var textSplitter = new TokenTextSplitter();
-            simpleVectorStore.accept(textSplitter.apply(pdfReader.get()));
+
+            //simpleVectorStore.accept(textSplitter.apply(pdfReader.get()));
+
+            List<Document> splitDocuments = textSplitter.apply(pdfReader.get());
+            simpleVectorStore.add(splitDocuments);
+            simpleVectorStore.save(vectorStoreFile);
 
 
         }
