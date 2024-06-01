@@ -40,8 +40,12 @@ public class RagConfiguration {
 
     @Bean
     SimpleVectorStore simpleVectorStore(EmbeddingClient embeddingClient) throws IOException {
+
         var simpleVectorStore = new SimpleVectorStore(embeddingClient);
         var vectorStoreFile = getVectorStoreFile();
+
+        //var vectorStoreFile = new File(vectorStoreName);
+
         if (vectorStoreFile.exists()) {
             log.info("Vector Store File Exists,");
             simpleVectorStore.load(vectorStoreFile);
@@ -73,11 +77,11 @@ public class RagConfiguration {
 
             var pdfReader = new PagePdfDocumentReader(pdfResource, config);
 
-            //simpleVectorStore.accept(textSplitter.apply(pdfReader.get()));
+            simpleVectorStore.accept(textSplitter.apply(pdfReader.get()));
 
-            List<Document> splitDocuments = textSplitter.apply(pdfReader.get());
-            simpleVectorStore.add(splitDocuments);
-            simpleVectorStore.save(vectorStoreFile);
+            //List<Document> splitDocuments = textSplitter.apply(pdfReader.get());
+            //simpleVectorStore.add(splitDocuments);
+            //simpleVectorStore.save(vectorStoreFile);
 
 
         }
@@ -88,7 +92,9 @@ public class RagConfiguration {
     private File getVectorStoreFile() {
 
         Path path = Paths.get("src", "main", "resources", "data");
-        String absolutePath = path.toFile().getAbsolutePath() + "/" + vectorStoreName;
+        log.info("Path is [" + path + "]");
+        String absolutePath = path.toFile().getAbsolutePath() + "\\" + vectorStoreName;
+        log.info("Absolute path is [" + absolutePath + "]");
         return new File(absolutePath);
 
     }
