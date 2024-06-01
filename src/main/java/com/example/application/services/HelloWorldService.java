@@ -20,12 +20,10 @@ import java.util.List;
 public class HelloWorldService {
     private final CompanyRepository companyRepository;
     private final ContactRepository contactRepository;
-
     public HelloWorldService(CompanyRepository companyRepository, ContactRepository contactRepository) {
         this.companyRepository = companyRepository;
         this.contactRepository = contactRepository;
     }
-
     public record ContactRecord(
             Long id,
             @NotNull

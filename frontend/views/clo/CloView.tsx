@@ -1,23 +1,20 @@
-/*
-export default function AiView() {
-  return (
-    <div className="flex flex-col h-full items-center justify-center p-l text-center box-border">
-      <img style={{ width: '200px' }} src="images/empty-plant.png" />
-      <h2>This place intentionally left empty</h2>
-      <p>It’s a place where you can grow your own UI 🤗</p>
-    </div>
-  );
-}
-*/
-
 import { Button } from '@hilla/react-components/Button.js';
 import { Notification } from '@hilla/react-components/Notification.js';
 import { TextField } from '@hilla/react-components/TextField.js';
-import { AiService } from 'Frontend/generated/endpoints.js';
-import { useState } from 'react';
+import { CloService } from 'Frontend/generated/endpoints.js';
+//import { useState } from 'react';
+import {useEffect, useState} from 'react';
+import {Grid} from "@hilla/react-components/Grid";
+import {GridColumn} from "@hilla/react-components/GridColumn";
 
-export default function AiView() {
+import CloRecord from 'Frontend/generated/com/example/application/services/CloService/CloRecord';
+
+export default function CloView() {
+
   const [name, setName] = useState('');
+  const [clos, setClos] = useState<CloRecord[]>([]);
+  const [selected, setSelected] = useState<CloRecord | null | undefined>();
+
 
   return (
     <>
@@ -30,13 +27,28 @@ export default function AiView() {
         />
         <Button
           onClick={async () => {
-            const serverResponse = await AiService.askQuestion(name);
+            const serverResponse = await CloService.askQuestion(name);
             Notification.show(serverResponse);
           }}
         >
           Ask your question
         </Button>
       </section>
+
+      <div className="p-m flex gap-m">
+        <Grid
+            items={clos}
+            onActiveItemChanged={e => setSelected(e.detail.value)}
+            selectedItems={[selected]}>
+
+            <GridColumn path="name"/>
+            <GridColumn path="location" autoWidth/>
+
+        </Grid>
+      </div>
+
+
+
     </>
   );
 }

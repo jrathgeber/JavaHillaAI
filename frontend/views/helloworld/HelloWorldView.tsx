@@ -2,11 +2,8 @@ import { Button } from '@hilla/react-components/Button.js';
 import { Notification } from '@hilla/react-components/Notification.js';
 import { TextField } from '@hilla/react-components/TextField.js';
 import { HelloWorldService } from 'Frontend/generated/endpoints.js';
-//import { useState } from 'react';
-
 import ContactRecord from 'Frontend/generated/com/example/application/services/HelloWorldService/ContactRecord';
 import {useEffect, useState} from 'react';
-//import {CRMService} from "Frontend/generated/endpoints";
 import {Grid} from "@hilla/react-components/Grid";
 import {GridColumn} from "@hilla/react-components/GridColumn";
 
@@ -43,7 +40,7 @@ export default function HelloWorldView() {
         </Button>
       </section>
 
-              <div className="p-m flex gap-m">
+      <div className="p-m flex gap-m">
                   <Grid
                       items={contacts}
                       onActiveItemChanged={e => setSelected(e.detail.value)}
@@ -54,7 +51,7 @@ export default function HelloWorldView() {
                       <GridColumn path="email" autoWidth/>
                       <GridColumn path="company.name" header="Company name"/>
                   </Grid>
-              </div>
+      </div>
 
 
     </>
