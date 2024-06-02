@@ -27,6 +27,8 @@ export default function CloView() {
 
             style={{ width: '100%' }}
 
+            value={"What is Madison Park Funding LX Ltd ? "}
+
             onValueChanged={(e) => {
                 setName(e.detail.value);
             }}
