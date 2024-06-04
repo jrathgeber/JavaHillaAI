@@ -58,15 +58,6 @@ public class CloService {
                 .map(this::toCloRecord).toList();
     }
 
-    /*
-
-    public List<CloService.CloRecord> findAllClos() {
-        List<Clo> all = cloRepository.findAllWithClos();
-        return all.stream()
-                .map(this::toCloRecord).toList();
-    }
-*/
-
 
     public CloService.CloRecord save(CloService.CloRecord clo) {
 
