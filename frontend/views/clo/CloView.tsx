@@ -67,11 +67,11 @@ export default function CloView() {
 
             <GridColumn path="location" autoWidth/>
 
-              <GridColumn header="Document" autoWidth>
-              {() => <Button theme="tertiary-inline">
-              <a href="https://www.spglobal.com/_assets/documents/ratings/research/12585323.pdf">Go to Doc</a>
-              </Button>}
-              </GridColumn>
+            <GridColumn header="Document" autoWidth>
+            {() => <Button theme="tertiary-inline">
+            <a href="https://www.spglobal.com/_assets/documents/ratings/research/12585323.pdf">Go to Doc</a>
+            </Button>}
+            </GridColumn>
 
         </Grid>
       </div>
