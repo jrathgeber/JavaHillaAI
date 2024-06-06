@@ -6,8 +6,11 @@ import { CloService } from 'Frontend/generated/endpoints.js';
 import {useEffect, useState} from 'react';
 import {Grid} from "@hilla/react-components/Grid";
 import {GridColumn} from "@hilla/react-components/GridColumn";
-
 import CloRecord from 'Frontend/generated/com/example/application/services/CloService/CloRecord';
+
+import { Link } from 'react-router-dom'
+
+
 
 export default function CloView() {
 
@@ -22,13 +25,11 @@ export default function CloView() {
   return (
     <>
       <section className="flex p-m gap-m items-end">
-
         <TextArea label="Ask a long question"
 
             style={{ width: '100%' }}
 
-//           helperText="Madison Park Funding LX Ltd"
-
+ //          helperText="Madison Park Funding LX Ltd"
  //          placeholder="What is Madison Park Funding LX Ltd"
 
             onValueChanged={(e) => {
@@ -40,7 +41,16 @@ export default function CloView() {
         <Button
           onClick={async () => {
             const serverResponse = await CloService.askQuestion(name);
-            Notification.show(serverResponse);
+            Notification.show(serverResponse, {
+
+            //    position: 'middle',
+                duration: 0,
+                theme: 'contrast',
+
+                }
+
+            );
+
           }}
         >
           Ask your question
@@ -54,7 +64,14 @@ export default function CloView() {
             selectedItems={[selected]}>
 
             <GridColumn path="name"/>
+
             <GridColumn path="location" autoWidth/>
+
+              <GridColumn header="Document" autoWidth>
+              {() => <Button theme="tertiary-inline">
+              <a href="https://www.spglobal.com/_assets/documents/ratings/research/12585323.pdf">Go to Doc</a>
+              </Button>}
+              </GridColumn>
 
         </Grid>
       </div>
