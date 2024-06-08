@@ -43,7 +43,7 @@ export default function CloView() {
             const serverResponse = await CloService.askQuestion(name);
             Notification.show(serverResponse, {
 
-            //    position: 'middle',
+            //  position: 'middle',
                 duration: 0,
                 theme: 'contrast',
 

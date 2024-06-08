@@ -13,9 +13,9 @@ const routing = [
     handle: { title: 'Main' },
     children: [
       { path: '/', element: <HelloWorldView />, handle: { title: 'Hello World' } },
+      { path: '/ai', element: <AiView />, handle: { title: 'Plain Ai' } },
+      { path: '/clo', element: <CloView />, handle: { title: 'Chat with Clo' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
-      { path: '/ai', element: <AiView />, handle: { title: 'Ai' } },
-      { path: '/clo', element: <CloView />, handle: { title: 'Clo' } },
     ],
   },
 ] as RouteObject[];

@@ -12,10 +12,12 @@ export default function AiView() {
       <section className="flex p-m gap-m items-end">
         <TextField
           label="Your Question"
+          style={{ width: '100%' }}
           onValueChanged={(e) => {
             setName(e.detail.value);
           }}
         />
+        <br/>
         <Button
           onClick={async () => {
             const serverResponse = await AiService.askQuestion(name);

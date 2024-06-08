@@ -20,17 +20,19 @@ export default function MainLayout() {
         <header className="flex flex-col gap-m">
           <span className="font-semibold text-l">Chat WIF CLO</span>
           <nav>
+           {/*
             <NavLink className={navLinkClasses} to="/">
               Hello World
             </NavLink>
-            <NavLink className={navLinkClasses} to="/about">
-              About
-            </NavLink>
+            */}
             <NavLink className={navLinkClasses} to="/ai">
               Ai
             </NavLink>
             <NavLink className={navLinkClasses} to="/clo">
               Clo
+            </NavLink>
+            <NavLink className={navLinkClasses} to="/about">
+              About
             </NavLink>
           </nav>
         </header>
