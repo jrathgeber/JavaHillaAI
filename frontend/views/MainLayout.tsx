@@ -9,7 +9,7 @@ const navLinkClasses = ({ isActive }: any) => {
 };
 
 export default function MainLayout() {
-  const currentTitle = useRouteMetadata()?.title ?? 'Chat WIF CLO';
+  const currentTitle = useRouteMetadata()?.title ?? 'Chat Wth CLO';
   useEffect(() => {
     document.title = currentTitle;
   }, [currentTitle]);
@@ -18,18 +18,24 @@ export default function MainLayout() {
     <AppLayout primarySection="drawer">
       <div slot="drawer" className="flex flex-col justify-between h-full p-m">
         <header className="flex flex-col gap-m">
-          <span className="font-semibold text-l">Chat WIF CLO</span>
+          <span className="font-semibold text-l">Chat With CLO</span>
           <nav>
-           {/*
+           {
             <NavLink className={navLinkClasses} to="/">
-              Hello World
+              Home
             </NavLink>
-            */}
+            }
             <NavLink className={navLinkClasses} to="/ai">
-              Ai
+              Open Ai
             </NavLink>
             <NavLink className={navLinkClasses} to="/clo">
-              Clo
+              Chat with Clo
+            </NavLink>
+            <NavLink className={navLinkClasses} to="/reports">
+              Run Reports
+            </NavLink>
+            <NavLink className={navLinkClasses} to="/functions">
+              Call functions
             </NavLink>
             <NavLink className={navLinkClasses} to="/about">
               About
