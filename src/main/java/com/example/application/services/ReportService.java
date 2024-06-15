@@ -20,7 +20,7 @@ import java.util.Map;
 @BrowserCallable
 @AnonymousAllowed
 @Service
-public class CloService {
+public class ReportService {
 
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
@@ -28,7 +28,7 @@ public class CloService {
     private Resource ragPromptTemplate;
     private final CloRepository cloRepository;
 
-    public CloService(ChatClient chatClient, VectorStore vectorStore, CloRepository cloRepository) {
+    public ReportService(ChatClient chatClient, VectorStore vectorStore, CloRepository cloRepository) {
 
         this.chatClient = chatClient;
         this.vectorStore = vectorStore;
@@ -44,21 +44,21 @@ public class CloService {
     ) {
     }
 
-    private CloService.CloRecord toCloRecord(Clo c) {
-        return new CloService.CloRecord(
+    private CloRecord toCloRecord(Clo c) {
+        return new CloRecord(
                 c.getId(),
                 c.getName(),
                 c.getLocation()
         );
     }
 
-    public List<CloService.CloRecord> findAllClos() {
+    public List<CloRecord> findAllClos() {
         return cloRepository.findAll().stream()
                 .map(this::toCloRecord).toList();
     }
 
 
-    public CloService.CloRecord save(CloService.CloRecord clo) {
+    public CloRecord save(CloRecord clo) {
 
         var dbClo = cloRepository.findById(clo.id).orElseThrow();
 
