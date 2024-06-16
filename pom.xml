@@ -12,7 +12,7 @@
     <properties>
         <java.version>21</java.version>
         <hilla.version>2.5.7</hilla.version>
-        <spring-ai.version>0.8.1</spring-ai.version>
+        <spring-ai.version>1.0.0-M1</spring-ai.version>
     </properties>
 
     <parent>

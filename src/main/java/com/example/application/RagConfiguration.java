@@ -2,15 +2,14 @@ package com.example.application;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.embedding.EmbeddingClient;
+
 import org.springframework.ai.reader.ExtractedTextFormatter;
-import org.springframework.ai.reader.TextReader;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.pdf.config.PdfDocumentReaderConfig;
 import org.springframework.ai.transformer.splitter.TextSplitter;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +38,7 @@ public class RagConfiguration {
 
 
     @Bean
-    SimpleVectorStore simpleVectorStore(EmbeddingClient embeddingClient) throws IOException {
+    SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingClient) throws IOException {
 
         var simpleVectorStore = new SimpleVectorStore(embeddingClient);
         var vectorStoreFile = getVectorStoreFile();

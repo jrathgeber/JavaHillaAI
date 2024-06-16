@@ -6,11 +6,11 @@ import jakarta.validation.constraints.NotEmpty;
 @Entity
 public class CloReport extends AbstractEntity {
 
-    @NotEmpty
+   // @NotEmpty
     private String clo;
-    @NotEmpty
+ //   @NotEmpty
     private String name;
-    @NotEmpty
+//    @NotEmpty
     private String data;
 
     public CloReport() {

@@ -65,7 +65,8 @@ public class ReportService {
             return "Please ask a question about CLOs";
         } else {
 
-            CloReport cr = new CloReport("MP", "Size", "Large");
+
+            CloReport cr = cloService.getCloReport();
             cloReportRepository.save(cr);
 
             return cloService.askQuestion(question);

@@ -6,7 +6,7 @@ import { ReportService } from 'Frontend/generated/endpoints.js';
 import {useEffect, useState} from 'react';
 import {Grid} from "@hilla/react-components/Grid";
 import {GridColumn} from "@hilla/react-components/GridColumn";
-import CloRecord from 'Frontend/generated/com/example/application/services/ReportService/CloReportRecord';
+import CloReportRecord from 'Frontend/generated/com/example/application/services/ReportService/CloReportRecord';
 import { Link } from 'react-router-dom'
 
 
