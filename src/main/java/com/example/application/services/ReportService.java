@@ -1,90 +1,74 @@
 package com.example.application.services;
 
-import com.example.application.data.CloRepository;
-import com.example.application.data.Clo;
+import com.example.application.data.CloReportRepository;
+import com.example.application.data.CloReport;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 @BrowserCallable
 @AnonymousAllowed
 @Service
 public class ReportService {
 
-    private final ChatClient chatClient;
-    private final VectorStore vectorStore;
-    @Value("classpath:/prompts/rag-prompt-template.st")
-    private Resource ragPromptTemplate;
-    private final CloRepository cloRepository;
+    private final CloService cloService;
+    private final CloReportRepository cloReportRepository;
 
-    public ReportService(ChatClient chatClient, VectorStore vectorStore, CloRepository cloRepository) {
+    public ReportService(CloService cloService, CloReportRepository cloReportRepository) {
 
-        this.chatClient = chatClient;
-        this.vectorStore = vectorStore;
-        this.cloRepository = cloRepository;
+            this.cloService = cloService;
+            this.cloReportRepository = cloReportRepository;
 
     }
 
-    public record CloRecord(
+    public record CloReportRecord(
             @NotNull
             Long id,
+            String clo,
             String name,
-            String location
+            String data
     ) {
     }
 
-    private CloRecord toCloRecord(Clo c) {
-        return new CloRecord(
+    private CloReportRecord toCloReportRecord(CloReport c) {
+        return new CloReportRecord(
                 c.getId(),
+                c.getClo(),
                 c.getName(),
-                c.getLocation()
+                c.getData()
         );
     }
 
-    public List<CloRecord> findAllClos() {
-        return cloRepository.findAll().stream()
-                .map(this::toCloRecord).toList();
+    public List<CloReportRecord> findAllCloReports() {
+        return cloReportRepository.findAll().stream()
+                .map(this::toCloReportRecord).toList();
     }
 
 
-    public CloRecord save(CloRecord clo) {
+    public CloReportRecord save(CloReportRecord clorr) {
 
-        var dbClo = cloRepository.findById(clo.id).orElseThrow();
+        var dbClo = cloReportRepository.findById(clorr.id).orElseThrow();
 
-        dbClo.setName(clo.name);
+        dbClo.setClo(clorr.clo);
+        dbClo.setName(clorr.name);
+        dbClo.setData(clorr.data);
 
-        dbClo.setLocation(clo.location);
+        var saved = cloReportRepository.save(dbClo);
 
-        var saved = cloRepository.save(dbClo);
-
-        return toCloRecord(saved);
+        return toCloReportRecord(saved);
     }
-
 
     public String askQuestion(String question) {
         if (question.isEmpty()) {
             return "Please ask a question about CLOs";
         } else {
-            List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.query(question).withTopK(2));
-            List<String> contentList = similarDocuments.stream().map(Document::getContent).toList();
-            PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
-            Map<String, Object> promptParameters = new HashMap<>();
-            promptParameters.put("input", question);
-            promptParameters.put("documents", String.join("\n", contentList));
-            Prompt prompt = promptTemplate.create(promptParameters);
 
-            return chatClient.call(prompt).getResult().getOutput().getContent();
+            CloReport cr = new CloReport("MP", "Size", "Large");
+            cloReportRepository.save(cr);
+
+            return cloService.askQuestion(question);
         }
     }
 }
