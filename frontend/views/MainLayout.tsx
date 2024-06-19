@@ -34,8 +34,8 @@ export default function MainLayout() {
             <NavLink className={navLinkClasses} to="/reports">
               Run Reports
             </NavLink>
-            <NavLink className={navLinkClasses} to="/functions">
-              Call functions
+            <NavLink className={navLinkClasses} to="/trades">
+              Make Trades
             </NavLink>
             <NavLink className={navLinkClasses} to="/about">
               About

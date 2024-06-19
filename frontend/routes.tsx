@@ -9,7 +9,7 @@ const HomeView = lazy(async () => import('Frontend/views/home/HomeView.js'));
 const AiView = lazy(async () => import('Frontend/views/ai/AiView.js'));
 const CloView = lazy(async () => import('Frontend/views/clo/CloView.js'));
 const ReportsView = lazy(async () => import('Frontend/views/reports/ReportsView.js'));
-const FunctionsView = lazy(async () => import('Frontend/views/functions/FunctionsView.js'));
+const TradesView = lazy(async () => import('Frontend/views/trades/TradesView.js'));
 
 const routing = [
   {
@@ -20,7 +20,7 @@ const routing = [
       { path: '/ai', element: <AiView />, handle: { title: 'Plain Ai' } },
       { path: '/clo', element: <CloView />, handle: { title: 'Chat with Clo' } },
       { path: '/reports', element: <ReportsView />, handle: { title: 'Reports' } },
-      { path: '/functions', element: <FunctionsView />, handle: { title: 'Functions' } },
+      { path: '/trades', element: <TradesView />, handle: { title: 'Trades' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
     ],
   },
