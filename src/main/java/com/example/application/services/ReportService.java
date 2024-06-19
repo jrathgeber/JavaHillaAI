@@ -69,6 +69,13 @@ public class ReportService {
             CloReport cr = cloService.getCloReport();
             cloReportRepository.save(cr);
 
+            List<CloReport> cll = cloService.getDataElements();
+
+            for(CloReport cl : cll)
+            {
+                cloReportRepository.save(cl);
+            }
+
             return cloService.askQuestion(question);
         }
     }

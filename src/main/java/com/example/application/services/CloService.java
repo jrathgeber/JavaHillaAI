@@ -15,6 +15,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import org.springframework.ai.converter.MapOutputConverter;
 @Service
 public class CloService {
 
-   private final ChatClient chatClient;
+    private final ChatClient chatClient;
     private final VectorStore vectorStore;
     @Value("classpath:/prompts/rag-prompt-template.st")
     private Resource ragPromptTemplate;
@@ -77,9 +78,6 @@ public class CloService {
     }
 
 
-
-
-
     public String getReportValues(String question) {
 
         /*
@@ -116,16 +114,25 @@ public class CloService {
         return "works";
 
 
+    }
 
 
+    public List<CloReport> getDataElements() {
+
+        List<CloReport> actorsFilms = chatClient.prompt()
+                .user("Generate a list of attributes for Madison Park Funding LX Clo.  ")
+                .call()
+                .entity(new ParameterizedTypeReference<List<CloReport>>() {
+                });
+
+        return actorsFilms;
     }
 
 
     public CloReport getCloReport() {
 
-
         return chatClient.prompt()
-                .user(u -> u.text("Find the value {data} of a CLO for {clo}. Return all fields with word blank if you dont know")
+                .user(u -> u.text("Find the value {data} of a CLO for {clo}. Return all fields with number 999 if you don't know")
                         .param("clo", "Madison Park Funding LX Ltd").param("name", "Value").param("data", "100"))
                 .call()
                 .entity(CloReport.class);

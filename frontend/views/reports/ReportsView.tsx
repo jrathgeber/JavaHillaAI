@@ -56,7 +56,7 @@ export default function ReportsView() {
             selectedItems={[selected]}>
             <GridColumn path="clo"/>
             <GridColumn path="name" autoWidth/>
-            <GridColumn header="data" autoWidth>
+            <GridColumn path="data" autoWidth>
             </GridColumn>
         </Grid>
       </div>
