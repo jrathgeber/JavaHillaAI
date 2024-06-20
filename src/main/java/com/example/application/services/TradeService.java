@@ -66,14 +66,21 @@ public class TradeService {
         return toCloTradeRecord(saved);
     }
 
+    CloTrade getCloDummyTrade () {
+
+        CloTrade ctdummy = new CloTrade("MP20", "Buy", 200000, 120.99, false);
+
+        return ctdummy;
+
+    }
+
     public String askQuestion(String question) {
         if (question.isEmpty()) {
             return "Please ask a question about CLOs";
         } else {
 
-
-            //CloTrade cr = cloService.getCloTrade();
-            //cloTradeRepository.save(cr);
+            CloTrade cr = getCloDummyTrade();
+            cloTradeRepository.save(cr);
 
             //List<CloTrade> cll = cloService.getDataElements();
 

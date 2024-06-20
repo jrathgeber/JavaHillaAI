@@ -8,6 +8,7 @@ import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -35,9 +36,12 @@ public class CloService {
     private Resource ragPromptTemplate;
     private final CloRepository cloRepository;
 
+
+
     public CloService(ChatClient.Builder builder, VectorStore vectorStore, CloRepository cloRepository) {
 
         this.chatClient = builder
+                .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore,SearchRequest.defaults()))
                 .build();
 
         this.vectorStore = vectorStore;
@@ -78,54 +82,13 @@ public class CloService {
     }
 
 
-    public String getReportValues(String question) {
-
-        /*
-
-        List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.query(question).withTopK(2));
-        List<String> contentList = similarDocuments.stream().map(Document::getContent).toList();
-        PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
-        Map<String, Object> promptParameters = new HashMap<>();
-        promptParameters.put("input", question);
-        promptParameters.put("documents", String.join("\n", contentList));
-        Prompt prompt = promptTemplate.create(promptParameters);
-
-         */
-
-        /*
-
-        MapOutputConverter mapOutputConverter = new MapOutputConverter();
-        String format = mapOutputConverter.getFormat();
-        String userInputTemplate = """
-           Provide me a List of {subject}
-           {format}
-           """;
-        PromptTemplate promptTemplate = new PromptTemplate(userInputTemplate,
-                Map.of("subject", "an array of numbers from 1 to 9 under they key name 'numbers'", "format", format));
-        Prompt prompt = new Prompt(promptTemplate.createMessage());
-
-
-        Generation generation = chatClient.call(prompt).getResult();
-        Map<String, Object> result = mapOutputConverter.convert(generation.getOutput().getContent());
-
-
-
-         */
-        return "works";
-
-
-    }
-
-
     public List<CloReport> getDataElements() {
 
-        List<CloReport> actorsFilms = chatClient.prompt()
-                .user("Generate a list of attributes for Madison Park Funding LX Clo.  ")
+        return chatClient.prompt()
+                .user("Generate a list of attributes for Madison Park Funding LX Ltd")
                 .call()
                 .entity(new ParameterizedTypeReference<List<CloReport>>() {
                 });
-
-        return actorsFilms;
     }
 
 
@@ -143,6 +106,9 @@ public class CloService {
         if (question.isEmpty()) {
             return "Please ask a question about CLOs";
         } else {
+
+            /*
+
             List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.query(question).withTopK(2));
             List<String> contentList = similarDocuments.stream().map(Document::getContent).toList();
             PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
@@ -151,9 +117,10 @@ public class CloService {
             promptParameters.put("documents", String.join("\n", contentList));
             Prompt prompt = promptTemplate.create(promptParameters);
 
-
+             */
             return chatClient
-                    .prompt(prompt)
+                    .prompt()
+                    .user(question)
                     .call()
                     .content(); // short for getResult().getOutput().getContent();
 

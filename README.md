@@ -1,7 +1,7 @@
-# Custom project from Hilla
+# Java Hilla AI AKA "Chat With CLO"
 
-This project can be used as a starting point to create your own Hilla application with Spring Boot.
-It contains all the necessary configuration and some placeholder files to get you started.
+This project has been created with [Hilla](https://hilla.dev/) and [Spring-Boot](https://spring.io/projects/spring-boot) and [Spring-AI](https://spring.io/projects/spring-ai).
+It contains all the necessary configuration and files to run it local on your PC. Of course you will need your own OpenAI API keys. That is about it though. 
 
 ## Running the application
 
@@ -10,7 +10,7 @@ type `mvnw` (Windows), or `./mvnw` (Mac & Linux), then open
 http://localhost:8080 in your browser.
 
 You can also import the project to your IDE of choice as you would with any
-Maven project.
+Maven project. I used Intelij 
 
 ## Deploying to Production
 
