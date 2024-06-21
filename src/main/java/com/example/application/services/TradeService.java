@@ -5,6 +5,10 @@ import com.example.application.data.CloTrade;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -13,12 +17,14 @@ import java.util.List;
 @Service
 public class TradeService {
 
-    private final CloService cloService;
+
+    private final OpenAiChatModel chatModel;
+
     private final CloTradeRepository cloTradeRepository;
 
-    public TradeService(CloService cloService, CloTradeRepository cloTradeRepository) {
+    public TradeService(OpenAiChatModel chatModel, CloTradeRepository cloTradeRepository) {
 
-        this.cloService = cloService;
+        this.chatModel = chatModel;
         this.cloTradeRepository = cloTradeRepository;
 
     }
@@ -79,8 +85,12 @@ public class TradeService {
             return "Please ask a question about CLOs";
         } else {
 
-            CloTrade cr = getCloDummyTrade();
-            cloTradeRepository.save(cr);
+            //CloTrade cr = getCloDummyTrade();
+            //cloTradeRepository.save(cr);
+
+
+            chatModel.call(new Prompt("Buy a CLO please",
+                    OpenAiChatOptions.builder().withFunction("buyCloFunction").build()));
 
             //List<CloTrade> cll = cloService.getDataElements();
 
@@ -89,7 +99,7 @@ public class TradeService {
             //    cloTradeRepository.save(cl);
             //}
 
-            return cloService.askQuestion(question);
+            return "bought";
         }
     }
 }

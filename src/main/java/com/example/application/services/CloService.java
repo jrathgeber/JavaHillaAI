@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -101,23 +103,13 @@ public class CloService {
                 .entity(CloReport.class);
     }
 
+
     public String askQuestion(String question) {
 
         if (question.isEmpty()) {
             return "Please ask a question about CLOs";
         } else {
 
-            /*
-
-            List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.query(question).withTopK(2));
-            List<String> contentList = similarDocuments.stream().map(Document::getContent).toList();
-            PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
-            Map<String, Object> promptParameters = new HashMap<>();
-            promptParameters.put("input", question);
-            promptParameters.put("documents", String.join("\n", contentList));
-            Prompt prompt = promptTemplate.create(promptParameters);
-
-             */
             return chatClient
                     .prompt()
                     .user(question)
