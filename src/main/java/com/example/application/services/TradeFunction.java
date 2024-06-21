@@ -21,10 +21,16 @@ public class TradeFunction {
     }
 
     @Bean
-    @Description("Buy a CLO given an instruction to")
+    @Description("Buy a CLO given an instruction to do so. ")
     public Function<TradeFunctionService.Request, TradeFunctionService.Response> buyCloFunction() {
-        return new TradeFunctionService(cloTradeRepository);
+        return new TradeFunctionService(cloTradeRepository, "Buy");
     }
 
+
+    @Bean
+    @Description("Sell a CLO given an instruction to do so. ")
+    public Function<TradeFunctionService.Request, TradeFunctionService.Response> sellCloFunction() {
+        return new TradeFunctionService(cloTradeRepository, "Sell");
+    }
 
 }

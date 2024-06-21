@@ -26,16 +26,16 @@ export default function MainLayout() {
             </NavLink>
             }
             <NavLink className={navLinkClasses} to="/ai">
-              Open Ai
+              Open AI API
             </NavLink>
             <NavLink className={navLinkClasses} to="/clo">
-              Chat with Clo
+              Chat with Clo (RAG)
             </NavLink>
             <NavLink className={navLinkClasses} to="/reports">
-              Run Reports
+              Run Reports (Ouput Parsing)
             </NavLink>
             <NavLink className={navLinkClasses} to="/trades">
-              Make Trades
+              Trade (Functions)
             </NavLink>
             <NavLink className={navLinkClasses} to="/about">
               About

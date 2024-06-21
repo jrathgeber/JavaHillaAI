@@ -38,7 +38,7 @@ export default function ReportsView() {
           onClick={async () => {
             const serverResponse = await ReportService.askQuestion(name);
             Notification.show(serverResponse, {
-                duration: 0,
+                // duration: 0,
                 theme: 'contrast',
                 }
             );
