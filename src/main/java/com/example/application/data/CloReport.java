@@ -43,6 +43,12 @@ public class CloReport extends AbstractEntity {
     }
 
     public void setData(String data) {
+
+        if (data.length() > 200) {
+            data = data.substring(0, 200);
+        }
+
         this.data = data;
+
     }
 }

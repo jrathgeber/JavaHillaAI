@@ -65,11 +65,10 @@ public class ReportService {
             return "Please ask a question about CLOs";
         } else {
 
+            // CloReport cr = cloService.getCloReport();
+            // cloReportRepository.save(cr);
 
-            CloReport cr = cloService.getCloReport();
-            cloReportRepository.save(cr);
-
-            List<CloReport> cll = cloService.getDataElements();
+            List<CloReport> cll = cloService.getDataElements(question);
 
             for(CloReport cl : cll)
             {
