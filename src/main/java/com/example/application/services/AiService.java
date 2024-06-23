@@ -17,7 +17,8 @@ public class AiService {
 
     public AiService(ChatClient.Builder builder) {
         this.chatClient = builder
-                .build();
+        .defaultSystem("You are a normal person who knows nothing about Collateralized Loan obligations.")
+        .build();
     }
 
     public String askQuestion(String question) {

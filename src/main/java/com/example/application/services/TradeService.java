@@ -1,5 +1,6 @@
 package com.example.application.services;
 
+import com.example.application.data.CloReport;
 import com.example.application.data.CloTradeRepository;
 import com.example.application.data.CloTrade;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -79,8 +80,10 @@ public class TradeService {
             return "Please ask a question about CLOs";
         } else {
 
+
         ChatResponse cr = chatModel.call(new Prompt(question,
                     OpenAiChatOptions.builder()
+                            .withUser("You are a CLO broker that can buy and sell CLOs. Always ask for a quantity before transacting.")
                             .withFunction("buyCloFunction")
                             .withFunction("sellCloFunction")
                             .build()));

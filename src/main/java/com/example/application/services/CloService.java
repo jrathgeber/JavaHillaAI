@@ -87,10 +87,9 @@ public class CloService {
     public List<CloReport> getDataElements(String question) {
 
         return chatClient.prompt()
-                // .user("Generate a list of attributes for Madison Park Funding LX Ltd")
                 .user(question)
                 .call()
-                .entity(new ParameterizedTypeReference<List<CloReport>>() {
+                 .entity(new ParameterizedTypeReference<List<CloReport>>() {
                 });
     }
 

@@ -30,17 +30,17 @@ public class TradeFunctionService implements Function<Request, Response> {
 
     }
 
-    public record Request(String order) {}
-    public record Response(String outcome) {}
+    public record Request(Long quantity, double price) {}
+    public record Response(Long quantity, double price) {}
 
     @Override
     public Response apply(Request r) {
 
-        CloTrade ctdummy = new CloTrade("MP30", dir, 500000, 99, false);
+        CloTrade ctdummy = new CloTrade("MP30", dir, r.quantity, r.price, false);
 
         cloTradeRepository.save(ctdummy);
 
-        return new Response(r.order);
+        return new Response(r.quantity, r.price);
     }
 
 }
