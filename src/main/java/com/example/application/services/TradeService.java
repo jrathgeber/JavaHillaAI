@@ -9,10 +9,16 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.document.MetadataMode;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @BrowserCallable
 @AnonymousAllowed
@@ -24,10 +30,13 @@ public class TradeService {
 
     private final CloTradeRepository cloTradeRepository;
 
-    public TradeService(OpenAiChatModel chatModel, CloTradeRepository cloTradeRepository) {
+    private final SimpleVectorStore simpleVectorStore;
+
+    public TradeService(OpenAiChatModel chatModel, CloTradeRepository cloTradeRepository, SimpleVectorStore vectorStore) {
 
         this.chatModel = chatModel;
         this.cloTradeRepository = cloTradeRepository;
+        this.simpleVectorStore = vectorStore;
 
     }
 
@@ -71,9 +80,24 @@ public class TradeService {
 
         var saved = cloTradeRepository.save(dbClo);
 
+        List<Document> documentList = new ArrayList<Document>();
+        documentList.add(convertToDocument(dbClo));
+        simpleVectorStore.add(documentList);
+
         return toCloTradeRecord(saved);
     }
 
+    private static Document convertToDocument(CloTrade ctr) {
+        // Convert object to a map of metadata
+        Map<String, Object> metadata = Map.of(
+                "id", ctr.getId(),
+                // Add other fields as needed
+                "quantity", ctr.getQuantity()
+        );
+
+        // Create a Document
+        return new Document(ctr.toString(), metadata);
+    }
 
     public String askQuestion(String question) {
         if (question.isEmpty()) {

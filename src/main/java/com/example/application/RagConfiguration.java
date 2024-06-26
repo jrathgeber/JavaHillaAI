@@ -43,8 +43,6 @@ public class RagConfiguration {
         var simpleVectorStore = new SimpleVectorStore(embeddingClient);
         var vectorStoreFile = getVectorStoreFile();
 
-        //var vectorStoreFile = new File(vectorStoreName);
-
         if (vectorStoreFile.exists()) {
             log.info("Vector Store File Exists,");
             simpleVectorStore.load(vectorStoreFile);
@@ -52,20 +50,6 @@ public class RagConfiguration {
 
             TextSplitter textSplitter = new TokenTextSplitter();
 
-            /*
-
-            log.info("Vector Store File Does Not Exist, loading documents");
-            TextReader textReader = new TextReader(faq);
-            textReader.getCustomMetadata().put("filename", "clo_stats.txt");
-            List<Document> documents = textReader.get();
-            TextSplitter textSplitter = new TokenTextSplitter();
-            List<Document> splitDocuments = textSplitter.apply(documents);
-            simpleVectorStore.add(splitDocuments);
-            simpleVectorStore.save(vectorStoreFile);
-
-
-
-             */
             log.info("Loading CLO IMA PDFs into Vector Store");
             var config = PdfDocumentReaderConfig.builder()
                     .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
@@ -75,13 +59,7 @@ public class RagConfiguration {
                     .build();
 
             var pdfReader = new PagePdfDocumentReader(pdfResource, config);
-
             simpleVectorStore.accept(textSplitter.apply(pdfReader.get()));
-
-            //List<Document> splitDocuments = textSplitter.apply(pdfReader.get());
-            //simpleVectorStore.add(splitDocuments);
-            //simpleVectorStore.save(vectorStoreFile);
-
 
         }
         return simpleVectorStore;
