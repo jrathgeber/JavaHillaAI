@@ -39,16 +39,16 @@ public class TradeFunctionService implements Function<Request, Response> {
 
     }
 
-    public record Request(Long quantity, double price) {
+    public record Request(String clo, Long quantity, double price) {
     }
 
-    public record Response(Long quantity, double price) {
+    public record Response(String clo, Long quantity, double price) {
     }
 
     @Override
     public Response apply(Request r) {
 
-        CloTrade ctdummy = new CloTrade("MP30", dir, r.quantity, r.price, false);
+        CloTrade ctdummy = new CloTrade(r.clo, dir, r.quantity, r.price, false);
 
         cloTradeRepository.save(ctdummy);
 
@@ -57,7 +57,7 @@ public class TradeFunctionService implements Function<Request, Response> {
         documentList.add(convertToDocument(ctdummy));
         simpleVectorStore.add(documentList);
 
-        return new Response(r.quantity, r.price);
+        return new Response(r.clo, r.quantity, r.price);
     }
 
     private static Document convertToDocument(CloTrade ctr) {

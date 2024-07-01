@@ -7,6 +7,8 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.document.Document;
@@ -26,18 +28,21 @@ import java.util.Map;
 public class TradeService {
 
 
-    private final OpenAiChatModel chatModel;
+    private final ChatClient chatClient;
 
     private final CloTradeRepository cloTradeRepository;
 
     private final SimpleVectorStore simpleVectorStore;
 
-    public TradeService(OpenAiChatModel chatModel, CloTradeRepository cloTradeRepository, SimpleVectorStore vectorStore) {
+    public TradeService(ChatClient.Builder builder, CloTradeRepository cloTradeRepository, SimpleVectorStore vectorStore) {
 
-        this.chatModel = chatModel;
+        this.chatClient = builder
+                .defaultSystem("You are a CLO broker who can trade them for clients. ")
+                .defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()))
+                .build();
+
         this.cloTradeRepository = cloTradeRepository;
         this.simpleVectorStore = vectorStore;
-
     }
 
     public record CloTradeRecord(
@@ -80,9 +85,12 @@ public class TradeService {
 
         var saved = cloTradeRepository.save(dbClo);
 
+        /*
+
         List<Document> documentList = new ArrayList<Document>();
         documentList.add(convertToDocument(dbClo));
         simpleVectorStore.add(documentList);
+         */
 
         return toCloTradeRecord(saved);
     }
@@ -99,20 +107,18 @@ public class TradeService {
         return new Document(ctr.toString(), metadata);
     }
 
+
     public String askQuestion(String question) {
         if (question.isEmpty()) {
             return "Please ask a question about CLOs";
         } else {
 
 
-        ChatResponse cr = chatModel.call(new Prompt(question,
-                    OpenAiChatOptions.builder()
-                            .withUser("You are a CLO broker that can buy and sell CLOs. Always ask for a quantity before transacting.")
-                            .withFunction("buyCloFunction")
-                            .withFunction("sellCloFunction")
-                            .build()));
-
-         return cr.getResult().getOutput().getContent();
+            return chatClient.prompt()
+                    .user(question)
+                    .functions("buyCloFunction", "sellCloFunction" )
+                    .call()
+                    .content();
 
         }
     }

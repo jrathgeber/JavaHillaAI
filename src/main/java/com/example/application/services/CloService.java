@@ -37,9 +37,6 @@ public class CloService {
     @Value("classpath:/prompts/rag-prompt-template.st")
     private Resource ragPromptTemplate;
     private final CloRepository cloRepository;
-
-
-
     public CloService(ChatClient.Builder builder, VectorStore vectorStore, CloRepository cloRepository) {
 
         this.chatClient = builder
@@ -50,7 +47,6 @@ public class CloService {
         this.cloRepository = cloRepository;
 
     }
-
     public record CloRecord(
             @NotNull
             Long id,
@@ -92,7 +88,6 @@ public class CloService {
                  .entity(new ParameterizedTypeReference<List<CloReport>>() {
                 });
     }
-
 
     public CloReport getCloReport() {
 
