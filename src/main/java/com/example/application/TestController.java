@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ChatController {
+public class TestController {
 
     private final ChatClient chatClient;
 
-    public ChatController(ChatClient.Builder builder) {
+    public TestController(ChatClient.Builder builder) {
         this.chatClient = builder
                 .build();
     }
@@ -38,6 +38,14 @@ public class ChatController {
                 .user(message)
                 .call()
                 .chatResponse();
+    }
+
+    @GetMapping("/faq")
+    public String faq(@RequestParam(value = "message", defaultValue = "What is the outlook for the CLO Market in 2024") String message) {
+        return chatClient.prompt()
+                .user(message)
+                .call()
+                .content();
     }
 
 }
