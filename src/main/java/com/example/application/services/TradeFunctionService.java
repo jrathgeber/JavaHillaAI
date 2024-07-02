@@ -20,54 +20,30 @@ public class TradeFunctionService implements Function<Request, Response> {
 
     private CloTradeRepository cloTradeRepository = null;
 
-    private SimpleVectorStore simpleVectorStore = null;
 
-    private String dir = "Undef";
-
-    public TradeFunctionService(CloTradeRepository cloTradeRepository, SimpleVectorStore vectorStore, String dir) {
+    public TradeFunctionService(CloTradeRepository cloTradeRepository) {
         this.cloTradeRepository = cloTradeRepository;
-        this.simpleVectorStore = vectorStore;
-        this.dir = dir;
     }
 
-    public TradeFunctionService(CloTradeRepository cloTradeRepository, SimpleVectorStore vectorStore) {
-        this.cloTradeRepository = cloTradeRepository;
-        this.simpleVectorStore = vectorStore;
-    }
 
     public TradeFunctionService() {
 
     }
 
-    public record Request(String clo, Long quantity, double price) {
+    public record Request(String clo, String buy_sell, Long quantity, double price) {
     }
 
-    public record Response(String clo, Long quantity, double price) {
+    public record Response(String clo, String buy_sell, Long quantity, double price) {
     }
 
     @Override
     public Response apply(Request r) {
 
-        CloTrade ctdummy = new CloTrade(r.clo, dir, r.quantity, r.price, false);
+        CloTrade ctr = new CloTrade(r.clo, r.buy_sell, r.quantity, r.price, false);
 
-        cloTradeRepository.save(ctdummy);
+        cloTradeRepository.save(ctr);
 
-
-        List<Document> documentList = new ArrayList<Document>();
-        documentList.add(convertToDocument(ctdummy));
-        simpleVectorStore.add(documentList);
-
-        return new Response(r.clo, r.quantity, r.price);
+        return new Response(r.clo, r.buy_sell, r.quantity, r.price);
     }
 
-    private static Document convertToDocument(CloTrade ctr) {
-        // Convert object to a map of metadata
-        Map<String, Object> metadata = Map.of(
-                "id", ctr.getId(),
-                // Add other fields as needed
-                "quantity", ctr.getQuantity(),
-                "clo", ctr.getClo()
-        );
-        return new Document(ctr.toString(), metadata);
-    }
 }

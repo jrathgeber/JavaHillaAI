@@ -10,31 +10,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 
 
-
 @Configuration
 public class TradeFunction {
 
     private final CloTradeRepository cloTradeRepository;
 
-    private final SimpleVectorStore simpleVectorStore;
-
-    public TradeFunction(CloTradeRepository cloTradeRepository, SimpleVectorStore vectorStore) {
+    public TradeFunction(CloTradeRepository cloTradeRepository) {
         this.cloTradeRepository = cloTradeRepository;
-        this.simpleVectorStore = vectorStore;
-
     }
 
     @Bean
-    @Description("Buy a CLO given an instruction to do so. ")
-    public Function<TradeFunctionService.Request, TradeFunctionService.Response> buyCloFunction() {
-        return new TradeFunctionService(cloTradeRepository, simpleVectorStore, "Buy");
+    @Description("Buy or Sell a CLO given an instruction to do so. ")
+    public Function<TradeFunctionService.Request, TradeFunctionService.Response> buyOrSellCloFunction() {
+        return new TradeFunctionService(cloTradeRepository);
     }
 
-
-    @Bean
-    @Description("Sell a CLO given an instruction to do so. ")
-    public Function<TradeFunctionService.Request, TradeFunctionService.Response> sellCloFunction() {
-        return new TradeFunctionService(cloTradeRepository, simpleVectorStore, "Sell");
-    }
 
 }

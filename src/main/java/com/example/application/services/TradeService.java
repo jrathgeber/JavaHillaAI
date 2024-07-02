@@ -27,7 +27,6 @@ import java.util.Map;
 @Service
 public class TradeService {
 
-
     private final ChatClient chatClient;
 
     private final CloTradeRepository cloTradeRepository;
@@ -85,12 +84,11 @@ public class TradeService {
 
         var saved = cloTradeRepository.save(dbClo);
 
-        /*
+        /* This code add the object to the vector store but is not used. */
 
         List<Document> documentList = new ArrayList<Document>();
         documentList.add(convertToDocument(dbClo));
         simpleVectorStore.add(documentList);
-         */
 
         return toCloTradeRecord(saved);
     }
@@ -116,7 +114,7 @@ public class TradeService {
 
             return chatClient.prompt()
                     .user(question)
-                    .functions("buyCloFunction", "sellCloFunction" )
+                    .functions("buyOrSellCloFunction" )
                     .call()
                     .content();
 
