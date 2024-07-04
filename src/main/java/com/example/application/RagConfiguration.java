@@ -36,6 +36,8 @@ public class RagConfiguration {
     @Value("classpath:/docs/12585323.pdf")
     private Resource pdfResource;
 
+    @Value("classpath:/docs/KB-Home-Reports-2024-Second-Quarter-Results-2024.pdf")
+    private Resource kbHolmesQ2;
 
     @Bean
     SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingClient) throws IOException {
@@ -50,7 +52,7 @@ public class RagConfiguration {
 
             TextSplitter textSplitter = new TokenTextSplitter();
 
-            log.info("Loading CLO IMA PDFs into Vector Store");
+            log.info("Loading CLO In A PDFs into Vector Store");
             var config = PdfDocumentReaderConfig.builder()
                     .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
                             .withNumberOfTopPagesToSkipBeforeDelete(0)
@@ -60,6 +62,11 @@ public class RagConfiguration {
 
             var pdfReader = new PagePdfDocumentReader(pdfResource, config);
             simpleVectorStore.accept(textSplitter.apply(pdfReader.get()));
+
+            var pdfReader2 = new PagePdfDocumentReader(kbHolmesQ2, config);
+            simpleVectorStore.accept(textSplitter.apply(pdfReader2.get()));
+
+            simpleVectorStore.save(vectorStoreFile);
 
         }
         return simpleVectorStore;
