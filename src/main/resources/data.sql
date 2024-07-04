@@ -1,5 +1,6 @@
 INSERT INTO "CLO" (ID, VERSION, NAME, LOCATION) VALUES
-(6, 1, 'Madison Park Funding LX Ltd', 'https://www.spglobal.com/_assets/documents/ratings/research/12585323.pdf');
+(6, 1, 'Madison Park Funding LX Ltd', 'https://www.spglobal.com/_assets/documents/ratings/research/12585323.pdf'),
+(7, 1, 'KB Home', 'https://s201.q4cdn.com/124745054/files/doc_news/KB-Home-Reports-2024-Second-Quarter-Results-2024.pdf');
 INSERT INTO "COMPANY" (ID, VERSION, NAME) VALUES
 (6, 1, 'Phillips Van Heusen Corp.'),
 (7, 1, 'Avaya Inc.'),

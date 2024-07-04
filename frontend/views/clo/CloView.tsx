@@ -52,12 +52,16 @@ export default function CloView() {
             items={clos}
             onActiveItemChanged={e => setSelected(e.detail.value)}
             selectedItems={[selected]}>
+
             <GridColumn path="name"/>
             <GridColumn path="location" autoWidth/>
-            <GridColumn header="Document" autoWidth>
-            {() => <Button theme="tertiary-inline">
-            <a href="https://www.spglobal.com/_assets/documents/ratings/research/12585323.pdf">Go to Doc</a>
-            </Button>}
+
+            <GridColumn header="Document" autoWidth >
+              {({ item: clo }) => (
+                <>
+                  <a href={clo.location}>Go to doc</a>
+                </>
+              )}
             </GridColumn>
         </Grid>
       </div>
