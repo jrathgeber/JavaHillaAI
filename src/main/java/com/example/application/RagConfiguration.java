@@ -66,7 +66,7 @@ public class RagConfiguration {
             var pdfReader2 = new PagePdfDocumentReader(kbHolmesQ2, config);
             simpleVectorStore.accept(textSplitter.apply(pdfReader2.get()));
 
-            simpleVectorStore.save(vectorStoreFile);
+            //simpleVectorStore.save(vectorStoreFile);
 
         }
         return simpleVectorStore;

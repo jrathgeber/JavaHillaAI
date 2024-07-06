@@ -25,7 +25,7 @@ public class Application implements AppShellConfigurator {
         // SpringApplication.run(Application.class, args);
 
         ConfigurableApplicationContext app = SpringApplication.run(Application.class, args);
-        Arrays.stream(app.getBeanDefinitionNames()).forEach(System.out::println);
+        //Arrays.stream(app.getBeanDefinitionNames()).forEach(System.out::println);
 
     }
 
