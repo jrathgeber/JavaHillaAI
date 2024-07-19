@@ -21,6 +21,7 @@ export default function HomeView() {
         label="Model"
         helperText="Select or type a model"
         items={items}
+        value="GPT-4o mini"
       ></ComboBox>
 
     </div>
